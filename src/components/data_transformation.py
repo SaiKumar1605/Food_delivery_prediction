@@ -25,14 +25,15 @@ class DataTransformation:
         try:
             logging.info('Data Transformation initiated')
             # Define which columns should be ordinal-encoded and which should be scaled
-            categorical_cols = ['cut', 'color','clarity']
-            numerical_cols = ['Delivery_person_Age','Delivery_person_Ratings','Prep_time','Distance']
-            cat_nom_cols = ['']
+            categorical_cols = ['Road_traffic_density', 'multiple_deliveries']
+            numerical_cols = ['Delivery_person_Age','Delivery_person_Ratings','Prep_time','Distance','Vehicle_condition_categorie']
+            cat_nom_cols = ['Weather_conditions','Type_of_order','Type_of_vehicle','Festival','City']
             
             # Define the custom ranking for each ordinal variable
-            cut_categories = ['Fair', 'Good', 'Very Good','Premium','Ideal']
-            color_categories = ['D', 'E', 'F', 'G', 'H', 'I', 'J']
-            clarity_categories = ['I1','SI2','SI1','VS2','VS1','VVS2','VVS1','IF']
+            ['Jam', 'High', 'Medium', 'Low']
+            Road_traffic_density_categories = ['Low','Medium','High','Jam']
+            #Vehicle_condition_categories = ['D', 'E', 'F', 'G', 'H', 'I', 'J']
+            multiple_deliveries_categories = ['I1','SI2','SI1','VS2','VS1','VVS2','VVS1','IF']
             
             logging.info('Pipeline Initiated')
 
