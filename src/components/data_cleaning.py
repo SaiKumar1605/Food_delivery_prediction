@@ -3,7 +3,9 @@ import sys
 import pandas as pd
 from src.logger import logging
 from src.exception import CustomException
-from src.utils import Haversine_np
+from src.utils import haversine_np
+from dataclasses import dataclass
+
 
 ## Intitialize the Data Cleaning Configuration
 
@@ -21,7 +23,7 @@ class DataCleaning:
 
     def initiate_data_cleaning(self):
         
-        logging.config('Data Cleaning starts')
+        logging.info('Data Cleaning starts')
 
         try:
             pass
