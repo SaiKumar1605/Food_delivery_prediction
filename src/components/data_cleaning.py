@@ -41,8 +41,15 @@ class DataCleaning:
             df.Time_Order_picked = df.Time_Order_picked.str.replace('24','00')
 
             df['Time_Order_picked'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Order_picked'], format = '%d-%m-%Y %H:%M')
+            df['Time_Orderd'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Orderd'], format='%d-%m-%Y %H:%M')
 
-            diff = (pd.to_datetime(d2['Time_Order_picked']) - pd.to_datetime(d2['Time_Orderd'])).dt.seconds/60 
+            df.Time_Order_picked = df.Time_Order_picked.str.replace('24','00')
+
+            df['Time_Order_picked'] = df['Time_Order_picked'].str[0:5]            
+
+            df['Time_Order_picked'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Order_picked'], format='%d-%m-%Y %H:%M')
+
+            diff = (pd.to_datetime(df['Time_Order_picked']) - pd.to_datetime(df['Time_Orderd'])).dt.seconds/60 
             df.insert(loc=11, column='Prep_time', value=diff)
 
             distance_km = haversine_np(df['Restaurant_longitude'],df['Restaurant_latitude'],df['Delivery_location_longitude'],df['Delivery_location_latitude'])
@@ -50,8 +57,9 @@ class DataCleaning:
 
             df.columns = df.columns.str.replace(' ','').str.replace("(",'_').str.replace(")",'')
 
-            loggin.info("Data Cleaning completed")
+            logging.info("Data Cleaning completed")
 
+            print(self.cleaning_config.Cleaned_data_path)
             df.to_csv(self.cleaning_config.Cleaned_data_path,index=False)
 
         except Exception as e:
