@@ -12,7 +12,7 @@ from dataclasses import dataclass
 @dataclass
 class DataCleaningconfig:
 
-    Cleaned_data_path:str=os.path.join('artifacts','Cleaned_data.csv')
+    Cleaned_data_path:str=os.path.join('data','Cleaned_data.csv')
 
 
 class DataCleaning:
@@ -40,11 +40,6 @@ class DataCleaning:
 
             df.Time_Order_picked = df.Time_Order_picked.str.replace('24','00')
 
-            df['Time_Order_picked'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Order_picked'], format = '%d-%m-%Y %H:%M')
-            df['Time_Orderd'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Orderd'], format='%d-%m-%Y %H:%M')
-
-            df.Time_Order_picked = df.Time_Order_picked.str.replace('24','00')
-
             df['Time_Order_picked'] = df['Time_Order_picked'].str[0:5]            
 
             df['Time_Order_picked'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Order_picked'], format='%d-%m-%Y %H:%M')
@@ -59,7 +54,7 @@ class DataCleaning:
 
             logging.info("Data Cleaning completed")
 
-            print(self.cleaning_config.Cleaned_data_path)
+            #print(self.cleaning_config.Cleaned_data_path)
             df.to_csv(self.cleaning_config.Cleaned_data_path,index=False)
 
         except Exception as e:

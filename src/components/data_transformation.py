@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OrdinalEncoder,StandardScaler
+from sklearn.preprocessing import OrdinalEncoder,StandardScaler,OneHotEncoder
 
 from src.exception import CustomException
 from src.logger import logging
@@ -69,7 +69,7 @@ class DataTransformation:
 
             preprocessor=ColumnTransformer([
             ('num_pipeline',num_pipeline,numerical_cols),
-            ('ord_pipeline',cat_pipeline,ordinal_cols),
+            ('ord_pipeline',ord_pipeline,ordinal_cols),
             ('nom_pipeline',nom_pipeline,nominal_cols)
             ])
             
