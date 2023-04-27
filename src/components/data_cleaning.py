@@ -36,11 +36,11 @@ class DataCleaning:
             
             df = df[~((~df.Time_Orderd.str.contains(r'[0-9]{2}:[0-9]{2}',na=False)) | (~df.Time_Order_picked.str.contains(r'[0-9]{2}:[0-9]{2}',na=False)))]
 
-            df['Time_Orderd'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Orderd'])
+            df['Time_Orderd'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Orderd'], format = "%d-%m-%Y %H:%M")
 
             df.Time_Order_picked = df.Time_Order_picked.str.replace('24','00')
 
-            df['Time_Order_picked'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Order_picked'])
+            df['Time_Order_picked'] = pd.to_datetime(df['Order_Date'] + ' ' + df['Time_Order_picked'], format = '%d-%m-%Y %H:%M')
 
             diff = (pd.to_datetime(d2['Time_Order_picked']) - pd.to_datetime(d2['Time_Orderd'])).dt.seconds/60 
             df.insert(loc=11, column='Prep_time', value=diff)
